@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Valentine 💘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+      text-align: center;
+    }
+
+    .screen {
+      display: none;
+      animation: fadeIn 1s ease forwards;
+      max-width: 90%;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    h1, p {
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: #ff4d6d;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .options button {
+      display: block;
+      width: 100%;
+      max-width: 250px;
+      margin: 10px auto;
+    }
+
+    .warning {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Floating Hearts */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+
+    /* Valentine final screen */
+    .valentine-buttons {
+      position: relative;
+      height: 80px;
+    }
+
+    #noBtn {
+      position: absolute;
+      right: 0;
+      animation: slideAway 1.5s ease forwards;
+    }
+
+    @keyframes slideAway {
+      0% { transform: translateX(0); opacity: 1; }
+      100% { transform: translateX(200px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screens -->
+  <div class="screen active">
+    <h1>Hi baby 😘</h1>
+    <button onclick="next()">NEXT</button>
+  </div>
+
+  <div class="screen">
+    <p>Before we continue, let me ask you a few questions.<br>
+    I want to know how well you know me.</p>
+    <button onclick="next()">NEXT</button>
+  </div>
+
+  <div class="screen">
+    <h1>When is my birthday?</h1>
+    <div class="options">
+      <button onclick="q1('A')">A) 5th May</button>
+      <button onclick="q1('B')">B) 5th Aug</button>
+    </div>
+  </div>
+
+  <div class="screen">
+    <h1>Tell me the date of our first kiss?</h1>
+    <p class="warning">Warning: Think carefully 😌</p>
+    <div class="options">
+      <button onclick="q2('A')">A) Oct 25</button>
+      <button onclick="q2('B')">B) Oct 23</button>
+      <button onclick="q2('C')">C) Oct 15</button>
+    </div>
+  </div>
+
+  <div class="screen">
+    <p>I know… you hate these kind of questions which include calendar dates 😌<br><br>
+    But at least you should remember little special dates, right??</p>
+    <button onclick="next()">NEXT</button>
+  </div>
+
+  <div class="screen">
+    <h1>How important you are in my life?</h1>
+    <div class="options">
+      <button onclick="q3()">A) Important</button>
+      <button onclick="q3()">B) Very important</button>
+      <button onclick="q3()">C) Extremely important</button>
+    </div>
+  </div>
+
+  <div class="screen">
+    <h1>Will you be my Valentine? 💘</h1>
+    <div class="valentine-buttons">
+      <button id="yesBtn" onclick="yesClick()">YES</button>
+      <button id="noBtn">NO</button>
+    </div>
+  </div>
+
+  <script>
+    const screens = document.querySelectorAll('.screen');
+    let current = 0;
+
+    function next() {
+      screens[current].classList.remove('active');
+      current++;
+      screens[current].classList.add('active');
+    }
+
+    function q1(answer) {
+      if (answer === 'A') {
+        alert("Been a year still don’t know my birthday 😤");
+      } else {
+        alert("You remember this because I kept bothering you about it 😌");
+      }
+      next();
+    }
+
+    function q2(answer) {
+      if (answer === 'B') {
+        alert("Am sure… This is pure luck… Right answer though 😌");
+      } else {
+        alert("I knew you would forgot 😤");
+      }
+      next();
+    }
+
+    function q3() {
+      alert("Ahhmmm… lil more than extreme… I love you 🩷");
+      next();
+    }
+
+    function yesClick() {
+      alert("Good… I am not giving “No” as an option to you 😌");
+    }
+
+    /* Floating hearts generator */
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (4 + Math.random() * 3) + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }, 300);
+  </script>
+
+</body>
+</html>
